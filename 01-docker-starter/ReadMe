@@ -1,0 +1,4 @@
+docker build -t starter-image .
+docker run --name <container-name> starter-image
+docker ps
+docker ps -a
