@@ -1,0 +1,5 @@
+1. Build an image
+    sudo docker build -t game-image:latest .
+
+2. Create and run container in interactive mode
+    sudo docker run -it game-image:latest

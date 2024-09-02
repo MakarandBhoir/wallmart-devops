@@ -1,0 +1,15 @@
+sudo docker build -t webgame:1.0 .
+
+# this will create container in attached mode.
+# --rm: container will be deleted as soon as it is stoped
+sudo docker run -p 8080:8080 --rm --name webgame-container webgame:1.0
+
+# this will create container in detached mode.
+# --rm: container will be deleted as soon as it is stoped
+sudo docker run -p 8080:8080 --rm --name webgame-container -d webgame:1.0
+
+# if the war file name is ROOT.war
+http://host-ip:8080
+
+# if the war file name is appname.war
+http://host-ip:8080/appname
