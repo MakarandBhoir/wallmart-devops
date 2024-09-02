@@ -1,0 +1,15 @@
+# crate image
+sudo docker build -t mydb-image .
+
+# run image and create container
+sudo docker run --name mydb-container -d mydb-image
+
+# enter inside container
+sudo docker exec -it mydb-container bash
+
+# connect to database and enter password
+mysql -h 127.0.0.1 -P 3306 -u root -p
+
+# run sql queries
+use mydb;
+select * from employees;
