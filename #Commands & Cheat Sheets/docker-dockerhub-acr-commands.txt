@@ -1,0 +1,40 @@
+---------------------------------------------------------------------------------
+Deploy on Docker
+---------------------------------------------------------------------------------
+Step 1: Create folder & with project war file (e.g. myshuttledev.war)
+Step 2: Create Dockerfile without extension in the root folder of project
+
+Step 3: Add following contents to Dockerfile
+	FROM tomcat:9
+	copy target/myshuttledev.war /usr/local/tomcat/webapps/
+
+Step 4: Create linux vm in azure and copy project folder using winscp to linux vm
+
+Step 5: Open terminal in project folder & check docker -v
+Step 6: Build docker image (image name myshuttledev)
+	sudo docker build -t myshuttledev .
+	
+Step 7: Run docker image (myshuttledev) & forward the post of tomcat server 8080 to outside of the container 9091
+	sudo docker run -d -p 9091:8080 myshuttledev
+	
+Step 8: Open browser & test locally
+	http://localhost:9091/myshuttledev
+-------------------------------------------------------------------------------------
+Adding image to ACR
+-------------------------------------------------------------------------------------
+
+sudo docker login <acr-path>
+Enable Access Key of acr_name
+Username:
+Password: 
+
+sudo docker tag myshuttledev <acr-path>/myshuttledev
+sudo docker push <acr-path>/myshuttledev
+sudo docker pull <acr-path>/myshuttledev
+
+---------------------------------------------------------------------------------
+Pushing image to docker hub (central repository for all images)
+---------------------------------------------------------------------------------
+Step1: docker login -u username -p password
+Step2: docker tag myshuttledev bhoirmakarand/myshuttledev
+Step3: docker push bhoirmakarand/myshuttledev
