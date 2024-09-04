@@ -1,0 +1,50 @@
+1.To create docker image of our kubernetes application
+  docker build -t kubernetes-starter-app .
+
+2.To start kubernates cluster
+  minikube status
+  minikube start --driver=docker
+
+  kubectl help
+  kubectl create
+
+3. To create deployment. try following but failed. The deployment is created but the pod will fail
+  kubectl create deployment first-app --image=kubernetes-starter-app
+  kubectl get deployment
+  kubectl get pods
+
+4. To delete deployment. 
+  kubectl delete deployment first-app
+
+5. To solve problem, push image to docker hub
+  docker tag kubernetes-starter-app bhoirmakarand/kubernetes-starter-app
+  docker push bhoirmakarand/kubernetes-starter-app
+
+6. To create deployment object once again with image from docker hub
+  kubectl create deployment first-app --image=bhoirmakarand/kubernetes-starter-app
+  kubectl get deployment
+  kubectl get pods
+
+7. To check as of running pods and deployment
+  minikube dashboard
+
+8. To exposes pods to the cluster or externally we used service object. Pods has internal IP address that gets change very often. Services group pods with shared IP address. Services can allow external access to pods.
+Without services, pods are very hard to reach and communication is difficult. Reaching a pod from outside the cluster is not possible at all without service
+
+  kubectl expose deployment first-app --type=LoadBalancer --port 8080
+  kubectl get services
+
+  minikube service first-app
+
+  http://localhost:port/
+  http://localhost:port/error --> as per app, will crash but kubernetes will restart the pods
+  kubectl get pods
+
+9. To scale-up
+  kubectl scale deployment/first-app --replicas=3
+  kubectl get pods
+
+
+
+
+
